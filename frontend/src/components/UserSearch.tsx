@@ -1,17 +1,17 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Zap, X } from 'lucide-react';
-import { type UserSearchResult } from '../types/UserSearchResult.ts';
+import { type UserSearchResultModel } from '../types/UserSearchResultModel.ts';
 import { mockSearchUsers } from '../data/mockData';
-import {UserProfile} from './UserProfile';
+import UserProfile from "./UserProfile.tsx";
 
 interface UserSearchProps {
-    onSelectUser?: (user: UserSearchResult) => void;
+    onSelectUser?: (user: UserSearchResultModel) => void;
 }
 
 const UserSearch: React.FC<UserSearchProps> = ({ onSelectUser }) => {
     const [query, setQuery] = useState<string>('');
-    const [results, setResults] = useState<UserSearchResult[]>([]);
+    const [results, setResults] = useState<UserSearchResultModel[]>([]);
     const [isSearching, setIsSearching] = useState<boolean>(false);
     const [showResults, setShowResults] = useState<boolean>(false);
 
@@ -41,7 +41,7 @@ const UserSearch: React.FC<UserSearchProps> = ({ onSelectUser }) => {
         setResults([]);
     };
 
-    const handleSelectUser = (user: UserSearchResult) => {
+    const handleSelectUser = (user: UserSearchResultModel) => {
         onSelectUser?.(user);
         setShowResults(false);
     };

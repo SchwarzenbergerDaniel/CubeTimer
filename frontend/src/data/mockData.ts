@@ -1,11 +1,11 @@
 // BACKEND_EXPECTATION: GET /api/users/{userId}/profile
 // Response: { id, username, avatar, pb, ao5, ao12, totalSolves, createdAt }
-import type {UserSearchResult} from "../types/UserSearchResult.ts";
-import type {SolveData} from "../types/SolveData.ts";
-import type {SolveResult} from "../types/SolveResult.ts";
-import type {UserProfile} from "../types/UserProfile.ts";
+import type {UserSearchResultModel} from "../types/UserSearchResultModel.ts";
+import type {SolveDataModel} from "../types/SolveDataModel.ts";
+import type {SolveResultModel} from "../types/SolveResultModel.ts";
+import type {UserProfileModel} from "../types/UserProfileModel.ts";
 
-export const MOCK_USER_PROFILE: UserProfile = {
+export const MOCK_USER_PROFILE: UserProfileModel = {
     id: 1,
     username: 'CubeDestroyer99',
     avatar: null,
@@ -17,7 +17,7 @@ export const MOCK_USER_PROFILE: UserProfile = {
 };
 
 // TODO: GET /api/users/search?q={query}
-export const MOCK_SEARCH_RESULTS: UserSearchResult[] = [
+export const MOCK_SEARCH_RESULTS: UserSearchResultModel[] = [
     {id: 2, username: 'SpeedCubeKing', pb: 5.89, totalSolves: 4521},
     {id: 3, username: 'RubikMaster_DE', pb: 8.34, totalSolves: 2103},
     {id: 4, username: 'CubingNinja', pb: 6.12, totalSolves: 3890},
@@ -26,7 +26,7 @@ export const MOCK_SEARCH_RESULTS: UserSearchResult[] = [
 ];
 
 // TODO: POST /api/solves -> should return the updates times: { id, pb, ao5, ao12, totalSolves }
-export const mockSaveSolve = async (solveData: SolveData): Promise<SolveResult> => {
+export const mockSaveSolve = async (solveData: SolveDataModel): Promise<SolveResultModel> => {
     console.log('MOCK API CALL: POST /api/solves', solveData);
     return new Promise((resolve) => {
         setTimeout(() => {
@@ -42,7 +42,7 @@ export const mockSaveSolve = async (solveData: SolveData): Promise<SolveResult> 
 };
 
 // TODO: GET /api/users/search?q={query}
-export const mockSearchUsers = async (query: string): Promise<UserSearchResult[]> => {
+export const mockSearchUsers = async (query: string): Promise<UserSearchResultModel[]> => {
     console.log('MOCK API CALL: GET /api/users/search?q=' + query);
     return new Promise((resolve) => {
         setTimeout(() => {

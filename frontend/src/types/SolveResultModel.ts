@@ -1,4 +1,4 @@
-export interface SolveResult {
+export interface SolveResultModel {
     id: number;
     pb: number;
     ao5: number;

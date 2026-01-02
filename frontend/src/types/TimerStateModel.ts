@@ -1,4 +1,4 @@
-export enum TimerState {
+export enum TimerStateModel {
     IDLE = 'idle',
     INSPECTION = 'inspection',
     READY_WAITING = 'ready_waiting',

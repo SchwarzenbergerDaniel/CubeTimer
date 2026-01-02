@@ -1,9 +1,9 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
-import { TimerState } from '../types/TimerState.ts';
+import { TimerStateModel } from '../types/TimerStateModel.ts';
 import { generateScramble } from '../utils/scrambleGenerator';
 
 interface UseTimerReturn {
-    timerState: TimerState;
+    timerState: TimerStateModel;
     scramble: string;
     inspectionTime: number;
     elapsedTime: number;
@@ -14,13 +14,13 @@ interface UseTimerReturn {
     stopTimer: () => void;
     cancelHold: () => void;
     resetTimer: () => void;
-    setTimerState: React.Dispatch<React.SetStateAction<TimerState>>;
+    setTimerState: React.Dispatch<React.SetStateAction<TimerStateModel>>;
     holdStartTime: number | null;
     setHoldStartTime: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 export const useTimer = (): UseTimerReturn => {
-    const [timerState, setTimerState] = useState<TimerState>(TimerState.IDLE);
+    const [timerState, setTimerState] = useState<TimerStateModel>(TimerStateModel.IDLE);
     const [scramble, setScramble] = useState<string>(generateScramble());
     const [inspectionTime, setInspectionTime] = useState<number>(15);
     const [elapsedTime, setElapsedTime] = useState<number>(0);
@@ -36,7 +36,7 @@ export const useTimer = (): UseTimerReturn => {
         if (timerRef.current) clearInterval(timerRef.current);
         if (inspectionRef.current) clearInterval(inspectionRef.current);
         if (holdTimerRef.current) clearTimeout(holdTimerRef.current);
-        setTimerState(TimerState.IDLE);
+        setTimerState(TimerStateModel.IDLE);
         setElapsedTime(0);
         setInspectionTime(15);
         setHoldStartTime(null);
@@ -45,14 +45,14 @@ export const useTimer = (): UseTimerReturn => {
     }, []);
 
     const startInspection = useCallback(() => {
-        setTimerState(TimerState.INSPECTION);
+        setTimerState(TimerStateModel.INSPECTION);
         setInspectionTime(15);
 
         inspectionRef.current = setInterval(() => {
             setInspectionTime((prev) => {
                 if (prev <= 1) {
                     if (inspectionRef.current) clearInterval(inspectionRef.current);
-                    setTimerState(TimerState.READY_WAITING);
+                    setTimerState(TimerStateModel.READY_WAITING);
                     return 0;
                 }
                 return prev - 1;
@@ -61,21 +61,21 @@ export const useTimer = (): UseTimerReturn => {
     }, []);
 
     const startHoldSequence = useCallback(() => {
-        setTimerState(TimerState.READY_WAITING);
+        setTimerState(TimerStateModel.READY_WAITING);
         setHoldStartTime(Date.now());
 
         holdTimerRef.current = setTimeout(() => {
-            setTimerState(TimerState.READY_SET);
+            setTimerState(TimerStateModel.READY_SET);
 
             holdTimerRef.current = setTimeout(() => {
-                setTimerState(TimerState.READY_GO);
+                setTimerState(TimerStateModel.READY_GO);
             }, 250);
         }, 250);
     }, []);
 
     const startTimer = useCallback(() => {
         if (inspectionRef.current) clearInterval(inspectionRef.current);
-        setTimerState(TimerState.RUNNING);
+        setTimerState(TimerStateModel.RUNNING);
         startTimeRef.current = Date.now();
 
         timerRef.current = setInterval(() => {
@@ -92,7 +92,7 @@ export const useTimer = (): UseTimerReturn => {
             setElapsedTime(time);
             setFinalTime(time);
         }
-        setTimerState(TimerState.STOPPED);
+        setTimerState(TimerStateModel.STOPPED);
     }, []);
 
     const cancelHold = useCallback(() => {

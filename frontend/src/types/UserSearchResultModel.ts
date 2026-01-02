@@ -1,4 +1,4 @@
-export interface UserSearchResult {
+export interface UserSearchResultModel {
     id: number;
     username: string;
     pb: number;

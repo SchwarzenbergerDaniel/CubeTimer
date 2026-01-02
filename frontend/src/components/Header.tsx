@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion';
 import { Clock, User } from 'lucide-react';
-import type { UserProfile } from '../types/UserProfile';
-import type { UserSearchResult } from '../types/UserSearchResult';
+import type { UserProfileModel } from '../types/UserProfileModel.ts';
+import type { UserSearchResultModel } from '../types/UserSearchResultModel.ts';
 import UserSearch from './UserSearch';
 
 interface HeaderProps {
-    userProfile: UserProfile;
-    onSelectUser: (user: UserSearchResult) => void;
+    userProfile: UserProfileModel;
+    onSelectUser: (user: UserSearchResultModel) => void;
 }
 
 export default function Header({ userProfile, onSelectUser }: HeaderProps) {

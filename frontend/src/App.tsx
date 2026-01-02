@@ -6,16 +6,16 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Timer from "./components/Timer";
 import UserProfileComponent from "./components/UserProfile";
-import type { UserSearchResult } from "./types/UserSearchResult";
-import type { SolveResult } from "./types/SolveResult";
-import type { UserProfile } from "./types/UserProfile";
+import type { UserSearchResultModel } from "./types/UserSearchResultModel.ts";
+import type { SolveResultModel } from "./types/SolveResultModel.ts";
+import type { UserProfileModel } from "./types/UserProfileModel.ts";
 import UserSearch from "./components/UserSearch";
 
 export default function App() {
-    const [userProfile, setUserProfile] = useState<UserProfile>(MOCK_USER_PROFILE);
-    const [selectedUser, setSelectedUser] = useState<UserSearchResult | null>(null);
+    const [userProfile, setUserProfile] = useState<UserProfileModel>(MOCK_USER_PROFILE);
+    const [selectedUser, setSelectedUser] = useState<UserSearchResultModel | null>(null);
 
-    const handleSolveComplete = (result: SolveResult): void => {
+    const handleSolveComplete = (result: SolveResultModel): void => {
         setUserProfile((prev) => ({
             ...prev,
             pb: result.pb,
@@ -25,7 +25,7 @@ export default function App() {
         }));
     };
 
-    const handleSelectUser = (user: UserSearchResult): void => {
+    const handleSelectUser = (user: UserSearchResultModel): void => {
         setSelectedUser(user);
     };
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { TimerState } from '../types/TimerState.ts';
+import { TimerStateModel } from '../types/TimerStateModel.ts';
 import { formatTime } from '../utils/timeFormatter';
 
 interface TimerDisplayProps {
-    timerState: TimerState;
+    timerState: TimerStateModel;
     inspectionTime: number;
     elapsedTime: number;
 }
@@ -16,17 +16,17 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
                                                    }) => {
     const getStateColor = (): string => {
         switch (timerState) {
-            case TimerState.INSPECTION:
+            case TimerStateModel.INSPECTION:
                 return 'text-amber-400';
-            case TimerState.READY_WAITING:
+            case TimerStateModel.READY_WAITING:
                 return 'text-red-500';
-            case TimerState.READY_SET:
+            case TimerStateModel.READY_SET:
                 return 'text-orange-400';
-            case TimerState.READY_GO:
+            case TimerStateModel.READY_GO:
                 return 'text-emerald-400';
-            case TimerState.RUNNING:
+            case TimerStateModel.RUNNING:
                 return 'text-cyan-300';
-            case TimerState.STOPPED:
+            case TimerStateModel.STOPPED:
                 return 'text-lime-400';
             default:
                 return 'text-zinc-100';
@@ -36,7 +36,7 @@ const TimerDisplay: React.FC<TimerDisplayProps> = ({
     return (
         <div className="text-center py-12">
             <AnimatePresence mode="wait">
-                {timerState === TimerState.INSPECTION ? (
+                {timerState === TimerStateModel.INSPECTION ? (
                     <motion.div
                         key="inspection"
                         initial={{ scale: 0.8, opacity: 0 }}

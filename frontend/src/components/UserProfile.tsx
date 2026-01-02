@@ -1,18 +1,18 @@
 import React from 'react';
 import {motion} from 'framer-motion';
 import {User, Trophy, Target, TrendingUp, Hash, ChevronRight} from 'lucide-react';
-import {type UserProfile} from '../types/UserProfile.ts';
-import { type UserSearchResult} from '../types/UserSearchResult.ts';
+import {type UserProfileModel} from '../types/UserProfileModel.ts';
+import { type UserSearchResultModel} from '../types/UserSearchResultModel.ts';
 import StatBlock from './StatBlock';
 
 interface UserProfileProps {
-    profile: UserProfile | UserSearchResult;
+    profile: UserProfileModel | UserSearchResultModel;
     isCompact?: boolean;
 }
 
 const isFullProfile = (
-    profile: UserProfile | UserSearchResult
-): profile is UserProfile => {
+    profile: UserProfileModel | UserSearchResultModel
+): profile is UserProfileModel => {
     return 'ao5' in profile;
 };
 

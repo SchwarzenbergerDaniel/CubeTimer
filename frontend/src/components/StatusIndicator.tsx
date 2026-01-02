@@ -1,27 +1,27 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { TimerState } from '../types/TimerState.ts';
+import { TimerStateModel } from '../types/TimerStateModel.ts';
 
 interface StatusIndicatorProps {
-    timerState: TimerState;
+    timerState: TimerStateModel;
 }
 
 const StatusIndicator: React.FC<StatusIndicatorProps> = ({ timerState }) => {
     const getStatusText = (): string => {
         switch (timerState) {
-            case TimerState.IDLE:
+            case TimerStateModel.IDLE:
                 return 'Ready';
-            case TimerState.INSPECTION:
+            case TimerStateModel.INSPECTION:
                 return 'Inspect';
-            case TimerState.READY_WAITING:
+            case TimerStateModel.READY_WAITING:
                 return 'Hold...';
-            case TimerState.READY_SET:
+            case TimerStateModel.READY_SET:
                 return 'Almost...';
-            case TimerState.READY_GO:
+            case TimerStateModel.READY_GO:
                 return 'GO!';
-            case TimerState.RUNNING:
+            case TimerStateModel.RUNNING:
                 return 'Solving';
-            case TimerState.STOPPED:
+            case TimerStateModel.STOPPED:
                 return 'Done!';
             default:
                 return '';
@@ -30,19 +30,19 @@ const StatusIndicator: React.FC<StatusIndicatorProps> = ({ timerState }) => {
 
     const getIndicatorColor = (): string => {
         switch (timerState) {
-            case TimerState.IDLE:
+            case TimerStateModel.IDLE:
                 return 'bg-zinc-500';
-            case TimerState.INSPECTION:
+            case TimerStateModel.INSPECTION:
                 return 'bg-amber-400';
-            case TimerState.READY_WAITING:
+            case TimerStateModel.READY_WAITING:
                 return 'bg-red-500';
-            case TimerState.READY_SET:
+            case TimerStateModel.READY_SET:
                 return 'bg-orange-400';
-            case TimerState.READY_GO:
+            case TimerStateModel.READY_GO:
                 return 'bg-emerald-400';
-            case TimerState.RUNNING:
+            case TimerStateModel.RUNNING:
                 return 'bg-cyan-400';
-            case TimerState.STOPPED:
+            case TimerStateModel.STOPPED:
                 return 'bg-lime-400';
             default:
                 return 'bg-zinc-500';
@@ -64,7 +64,7 @@ const StatusIndicator: React.FC<StatusIndicatorProps> = ({ timerState }) => {
                         className={`w-3 h-3 rounded-full ${getIndicatorColor()}`}
                         animate={{ scale: [1, 1.2, 1] }}
                         transition={{
-                            repeat: timerState === TimerState.RUNNING ? Infinity : 0,
+                            repeat: timerState === TimerStateModel.RUNNING ? Infinity : 0,
                             duration: 0.5
                         }}
                     />

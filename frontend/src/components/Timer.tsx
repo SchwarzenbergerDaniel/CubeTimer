@@ -7,13 +7,13 @@ import TimerDisplay from './TimerDisplay';
 import StatusIndicator from './StatusIndicator';
 import KeyboardInstructions from './KeyboardInstructions';
 import SaveDialog from './SaveDialog';
-import { TimerState } from "../types/TimerState";
-import type { SolveResult } from "../types/SolveResult";
-import type { UserProfile } from "../types/UserProfile";
+import { TimerStateModel } from "../types/TimerStateModel.ts";
+import type { SolveResultModel } from "../types/SolveResultModel.ts";
+import type { UserProfileModel } from "../types/UserProfileModel.ts";
 
 interface TimerProps {
-    onSolveComplete?: (result: SolveResult) => void;
-    userProfile: UserProfile;
+    onSolveComplete?: (result: SolveResultModel) => void;
+    userProfile: UserProfileModel;
 }
 
 export default function Timer({ onSolveComplete, userProfile }: TimerProps) {
@@ -57,7 +57,7 @@ export default function Timer({ onSolveComplete, userProfile }: TimerProps) {
     }, [resetTimer]);
 
     useEffect(() => {
-        if (timerState === TimerState.STOPPED && finalTime !== null) {
+        if (timerState === TimerStateModel.STOPPED && finalTime !== null) {
             setShowSaveDialog(true);
         }
     }, [timerState, finalTime]);
@@ -66,16 +66,16 @@ export default function Timer({ onSolveComplete, userProfile }: TimerProps) {
         const handleKeyDown = (e: KeyboardEvent) => {
             if (showSaveDialog) return;
 
-            if (e.code === 'Enter' && timerState === TimerState.IDLE) {
+            if (e.code === 'Enter' && timerState === TimerStateModel.IDLE) {
                 e.preventDefault();
                 startInspection();
             }
 
             if (e.code === 'Space') {
                 e.preventDefault();
-                if (timerState === TimerState.RUNNING) {
+                if (timerState === TimerStateModel.RUNNING) {
                     stopTimer();
-                } else if ([TimerState.IDLE, TimerState.INSPECTION].includes(timerState)) {
+                } else if ([TimerStateModel.IDLE, TimerStateModel.INSPECTION].includes(timerState)) {
                     if (!holdStartTime) {
                         startHoldSequence();
                     }
@@ -92,11 +92,11 @@ export default function Timer({ onSolveComplete, userProfile }: TimerProps) {
             if (showSaveDialog) return;
 
             if (e.code === 'Space') {
-                if (timerState === TimerState.READY_GO) {
+                if (timerState === TimerStateModel.READY_GO) {
                     startTimer();
-                } else if ([TimerState.READY_WAITING, TimerState.READY_SET].includes(timerState)) {
+                } else if ([TimerStateModel.READY_WAITING, TimerStateModel.READY_SET].includes(timerState)) {
                     cancelHold();
-                    setTimerState(inspectionTime > 0 ? TimerState.INSPECTION : TimerState.IDLE);
+                    setTimerState(inspectionTime > 0 ? TimerStateModel.INSPECTION : TimerStateModel.IDLE);
                 }
                 setHoldStartTime(null);
             }
@@ -112,11 +112,11 @@ export default function Timer({ onSolveComplete, userProfile }: TimerProps) {
 
     const getStateBg = (): string => {
         switch (timerState) {
-            case TimerState.INSPECTION: return 'from-amber-950/30 to-zinc-950';
-            case TimerState.READY_WAITING: return 'from-red-950/40 to-zinc-950';
-            case TimerState.READY_SET: return 'from-orange-950/40 to-zinc-950';
-            case TimerState.READY_GO: return 'from-emerald-950/40 to-zinc-950';
-            case TimerState.RUNNING: return 'from-cyan-950/30 to-zinc-950';
+            case TimerStateModel.INSPECTION: return 'from-amber-950/30 to-zinc-950';
+            case TimerStateModel.READY_WAITING: return 'from-red-950/40 to-zinc-950';
+            case TimerStateModel.READY_SET: return 'from-orange-950/40 to-zinc-950';
+            case TimerStateModel.READY_GO: return 'from-emerald-950/40 to-zinc-950';
+            case TimerStateModel.RUNNING: return 'from-cyan-950/30 to-zinc-950';
             default: return 'from-zinc-900 to-zinc-950';
         }
     };
