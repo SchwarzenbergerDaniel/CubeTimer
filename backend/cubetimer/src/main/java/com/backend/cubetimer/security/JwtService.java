@@ -1,4 +1,4 @@
-package com.backend.cubetimer.service;
+package com.backend.cubetimer.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

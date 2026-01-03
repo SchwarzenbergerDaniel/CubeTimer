@@ -1,6 +1,6 @@
 # CubeTrack
 
-CubeTrack is a web application designed for speedcubers to track, analyze, and improve their solving times that is hosted by a combination of Netlify and a Ubuntu Server that I own. As a cuber who loves getting lost for hours in big cubes, I built CubeTrack because existing timers just didn't cut it: they  keep your stats trapped on one device (they store it locally), and record every accidental 0.2s 'misfire' as a real solve. I wanted a modern platform that lets me see my actual stats. 
+CubeTrack is a web application designed for speedcubers to track, analyze, and improve their solving times, hosted by a combination of Netlify and a self-owned Ubuntu Server. As a cuber who loves getting lost for hours in big cubes, I built CubeTrack because existing timers didn't cut it: they keep your stats trapped on one device and record every accidental 0.2s "misfire" as a real solve. I wanted a modern platform that provides a single source of truth for my stats.
 
 ## Core Features
 
@@ -18,14 +18,16 @@ CubeTrack is a web application designed for speedcubers to track, analyze, and i
 * **Tailwind CSS:** For a high-performance, utility-first design system.
 * **Framer Motion:** Used to handle smooth UI transitions and timer state visualizations.
 * **Lucide React:** Consistent iconography across the dashboard.
-* **Stateless State Management:** Leveraging React hooks for localized timer logic to minimize re-renders.
 
-### Backend
+### Backend & Infrastructure
 
 * **Spring Boot 3.x:** Providing a RESTful API layer.
 * **Spring Security:** Configured with a stateless filter chain for JWT-based authentication.
-* **Spring Data JPA:** For persistent storage of user profiles and solve history.
 * **PostgreSQL:** Relational database for structured solve data.
+* **Docker:** The database is containerized for environment consistency and ease of deployment.
+* **Docker Volumes:** Implemented persistent volume mapping to ensure solve data and user profiles survive container restarts or updates on the Ubuntu server.
+
+---
 
 ## Security Implementation
 

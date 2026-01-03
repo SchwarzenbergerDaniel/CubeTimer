@@ -5,6 +5,7 @@ import com.backend.cubetimer.dto.auth.LoginRequest;
 import com.backend.cubetimer.dto.auth.RegisterRequest;
 import com.backend.cubetimer.entities.User;
 import com.backend.cubetimer.repository.UserRepository;
+import com.backend.cubetimer.security.JwtService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
