@@ -40,5 +40,5 @@ sketch
 ## ignoring target file
 target/
 
-
+.env
 # End of https://mrkandreev.name/snippets/gitignore-generator/#Java,react,Java-Web,vite
