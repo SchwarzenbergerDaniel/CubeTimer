@@ -25,7 +25,7 @@ public class AuthService {
 
     public void register(RegisterRequest request) {
         if (userRepository.existsByUsername(request.username())) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Username taken");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "That username is already taken");
         }
 
         User user = new User();

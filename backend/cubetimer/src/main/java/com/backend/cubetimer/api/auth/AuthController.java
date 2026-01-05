@@ -44,7 +44,7 @@ public class AuthController {
                 .secure(true)
                 .path("/api/auth/refresh")
                 .maxAge(7 * 24 * 60 * 60)
-                .sameSite("Strict")
+                .sameSite("None")
                 .build();
 
         return ResponseEntity.ok()
